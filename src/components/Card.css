@@ -5,9 +5,12 @@
   background-color: red;
   border: 1px solid black;
   box-sizing: border-box;
+  transition: all 0.2s;
+  border-radius: 10px;
 }
 
 .clicked {
-  background-color: green;
+  background-color: rgb(186, 186, 186);
+  transform: scale(0.95);
   pointer-events: none;
 }
