@@ -1,19 +1,21 @@
 import React from "react";
-import PropTypes from "prop-types";
 import "./Card.css";
+import { useState } from "react";
 
-function Card({ value, isFlipped, onClick }) {
+function Card() {
+  const [isClicked, setIsClicked] = useState(false);
+
+  function handleClick() {
+    setIsClicked(true);
+    console.log("clicked");
+  }
+
   return (
-    <div className={`card ${isFlipped ? "flipped" : ""}`} onClick={onClick}>
-      <div className="card-inner">{isFlipped ? "" : "Click to flip"}</div>
-    </div>
+    <div
+      className={`card ${isClicked ? "clicked" : ""}`}
+      onClick={handleClick}
+    ></div>
   );
 }
-
-Card.PropTypes = {
-  value: PropTypes.string.isRequired,
-  isFlipped: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
-};
 
 export default Card;
