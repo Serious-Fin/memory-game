@@ -32,6 +32,7 @@ function Board() {
   const cards = [];
 
   const [clickedColors, setClickedColors] = useState(new Set());
+  const [score, setScore] = useState(0);
 
   for (let i = 0; i < 25; i++) {
     const randomIndex = Math.floor(Math.random() * colors.length);
@@ -42,6 +43,8 @@ function Board() {
         color={color}
         clickedColors={clickedColors}
         setClickedColors={setClickedColors}
+        score={score}
+        setScore={setScore}
       />
     );
   }
