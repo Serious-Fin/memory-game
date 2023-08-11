@@ -1,23 +1,28 @@
 import "./Card.css";
 import { useState, useEffect } from "react";
 
-function Card({ color }) {
-  const [isClicked, setIsClicked] = useState(false);
-  const [cardColor, setCardColor] = useState(color);
-
+function Card({ color, clickedColors, setClickedColors }) {
   function handleClick() {
-    setIsClicked(true);
-    setCardColor("#b8b8b8");
-    console.log("clicked");
+    if (clickedColors.has(color)) {
+      console.log("You lose!");
+      setClickedColors(new Set());
+      return;
+    } else {
+      console.log(`You clicked ${color}!`);
+    }
+
+    const newClickedColors = new Set(clickedColors);
+    newClickedColors.add(color);
+    setClickedColors(newClickedColors);
   }
 
-  useEffect(() => {}, [cardColor]);
+  useEffect(() => {}, [color]);
 
   return (
     <div
-      className={`card ${isClicked ? "clicked" : ""}`}
+      className="card"
       onClick={handleClick}
-      style={{ backgroundColor: cardColor }}
+      style={{ backgroundColor: color }}
     ></div>
   );
 }

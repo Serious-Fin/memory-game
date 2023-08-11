@@ -1,6 +1,6 @@
 import "./board.css";
 import Card from "./Card.jsx";
-import React from "react";
+import { useState } from "react";
 
 const colors = [
   "#FF5733",
@@ -31,10 +31,19 @@ const colors = [
 function Board() {
   const cards = [];
 
+  const [clickedColors, setClickedColors] = useState(new Set());
+
   for (let i = 0; i < 25; i++) {
     const randomIndex = Math.floor(Math.random() * colors.length);
     const color = colors[randomIndex];
-    cards.push(<Card key={i} color={color} />);
+    cards.push(
+      <Card
+        key={i}
+        color={color}
+        clickedColors={clickedColors}
+        setClickedColors={setClickedColors}
+      />
+    );
   }
 
   return <div className="board">{cards}</div>;

@@ -8,9 +8,3 @@
   transition: all 0.2s;
   border-radius: 10px;
 }
-
-.clicked {
-  background-color: rgb(186, 186, 186);
-  transform: scale(0.95);
-  pointer-events: none;
-}
