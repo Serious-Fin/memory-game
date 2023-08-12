@@ -1,6 +1,7 @@
 import "./board.css";
 import Card from "./Card.jsx";
 import { useState } from "react";
+import Header from "./Header.jsx";
 
 const colors = [
   "#FF5733",
@@ -32,24 +33,39 @@ function Board() {
   const cards = [];
 
   const [clickedColors, setClickedColors] = useState(new Set());
-  const [score, setScore] = useState(0);
+  const [currentScore, setCurrentScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
+
+  function handleCardClick(color) {
+    if (clickedColors.has(color)) {
+      setClickedColors(new Set());
+      setCurrentScore(0);
+      return;
+    } else {
+      const newScore = currentScore + 1;
+      setCurrentScore(newScore);
+      if (newScore > highScore) {
+        setHighScore(newScore);
+      }
+    }
+
+    const newClickedColors = new Set(clickedColors);
+    newClickedColors.add(color);
+    setClickedColors(newClickedColors);
+  }
 
   for (let i = 0; i < 25; i++) {
     const randomIndex = Math.floor(Math.random() * colors.length);
     const color = colors[randomIndex];
-    cards.push(
-      <Card
-        key={i}
-        color={color}
-        clickedColors={clickedColors}
-        setClickedColors={setClickedColors}
-        score={score}
-        setScore={setScore}
-      />
-    );
+    cards.push(<Card key={i} color={color} handleClick={handleCardClick} />);
   }
 
-  return <div className="board">{cards}</div>;
+  return (
+    <>
+      <Header currentScore={currentScore} highScore={highScore} />
+      <div className="board">{cards}</div>
+    </>
+  );
 }
 
 export default Board;
